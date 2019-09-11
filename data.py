@@ -43,6 +43,11 @@ class GroundTruthDataset(torch_data.dataset.Dataset):
     def size(self):
         return len(self.dataset.images)
 
+    @property
+    def channels(self):
+        return {'cars3d': 3, 'dsprites_full': 1, 'dsprites_noshape': 1, 'color_dsprites': 3,
+                'noisy_dsprites': 3, 'scream_dsprites': 3, 'smallnorb': 1, 'mpi3d_toy': 3}[self.name]
+
 
 def get_data_loader(ds_name, batch_size, n_steps, seed=0, n_workers=0, **kwargs):
     ds = GroundTruthDataset(ds_name, batch_size * n_steps, seed=seed)
@@ -87,7 +92,7 @@ if __name__ == '__main__':
     3 - position x (32 different values)
     4 - position y (32 different values)
     '''
-    #output_samples('dsprites_full', n_rows=5, n_cols=5, n_figures=40)
+    # output_samples('dsprites_full', n_rows=5, n_cols=5, n_figures=40)
 
     '''
     0 - scale (6 different values)
@@ -104,7 +109,7 @@ if __name__ == '__main__':
     3 - position x (32 different values)
     4 - position y (32 different values)
     '''
-    output_samples('color_dsprites', n_rows=5, n_cols=5, n_figures=40)
+    # output_samples('color_dsprites', n_rows=5, n_cols=5, n_figures=40)
 
     '''
     0 - shape (3 different values)
